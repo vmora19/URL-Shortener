@@ -23,8 +23,8 @@ const host = "http://localhost:3000/"; //host
         }).then(function(data){ //check what was in the response
             if(data.status == "ok"){ //if the request was succesful
                 //display the new link on page
-                document.querySelector("p").innerText = host + data.shorturlid;
-                document.querySelector("a").href = host + data.shorturlid;
+                document.querySelector("#output a").innerText = host + data.shorturlid;
+                document.querySelector("#output a").href = host + data.shorturlid;
 
                 //add the link to our history table
                 let html = `
