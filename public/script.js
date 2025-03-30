@@ -1,5 +1,10 @@
 const host = "http://localhost:3000/"; //host
 
+        document.querySelector("#clear-history").addEventListener("click", function(){//function for clearing history
+            let html = "";
+            document.querySelector("tbody").innerHTML = html;
+        })
+
         document.querySelector("#create-short-url").addEventListener("click", function(){
         let longurl = document.querySelector("#input-long-url").value.trim();
         if(longurl.length == 0){ //if the user did not input anything
