@@ -1,4 +1,4 @@
-const host = "http://localhost:3000/"; //host
+const host = "https://us01.vercel.app/"; //host
 
         document.querySelector("#clear-history").addEventListener("click", function(){//function for clearing history
             let html = "";
