@@ -1,4 +1,4 @@
-const host = "/"; //host
+const host = "http://localhost:3000/"; //host
 
         document.querySelector("#clear-history").addEventListener("click", function(){//function for clearing history
             let html = "";
