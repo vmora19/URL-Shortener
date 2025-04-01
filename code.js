@@ -1,17 +1,16 @@
 const express = require("express"); //express module from Node.js
 
 const mysql = require("mysql2"); //mysql2 library
+require('dotenv').config();
 
 const app = express(); //application instance of express
 
 app.use(express.static("public")); //make express instance connect to public folder for access
 app.use(express.json()); //handles JSON requests
 
-const con = mysql.createConnection({//create connection from mysql2 library to database
-    host:"localhost",
-    user:"root",
-    database:"shorturls"
-});
+const con = mysql.createConnection(//create connection from mysql2 library to database
+    process.env.DATABSE_URL
+);
 
 con.connect(function(error){
     if(error){ //if there was error in the connection

@@ -1,4 +1,4 @@
-const host = "https://us01.vercel.app/"; //host
+const host = "/"; //host
 
         document.querySelector("#clear-history").addEventListener("click", function(){//function for clearing history
             let html = "";
