@@ -9,7 +9,7 @@ app.use(express.static("public")); //make express instance connect to public fol
 app.use(express.json()); //handles JSON requests
 
 const con = mysql.createConnection(//create connection from mysql2 library to database
-    process.env.DATABSE_URL
+    process.env.DATABASE_URL
 );
 
 con.connect(function(error){
