@@ -56,7 +56,7 @@ const host = "http://localhost:3000/"; //host
         })
     });
     (function(){
-        fetch(host + "api/get-all-short-urls").then(function(response){ //get method for all shortened urls
+        fetch(host + "api/get-all-short-urls").then(function(response){ //GET method for all shortened urls
             return response.json(); //get response
         }).then(function(data){ //check the data
 

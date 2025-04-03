@@ -28,24 +28,46 @@ app.get("/", function(request, response){ //GET method request to page
 
 app.post("/api/create-short-url", function(request, response){ //POST method to create a short url
     
-    let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi, '').substring(2,10); //creaate the uniqueID for a shortened link
-    let sql = `INSERT INTO links(longurl, shorturlid) VALUES('${request.body.longurl}', '${uniqueID}')`; //add the new shortened link to our db
-    con.query(sql, function(error, result){ //run the query
-        if(error){//if there was an error
-            response.status(500).json({
-                status:"notok",
-                message:"could not add to database"
-            });
-        }
-        else{
-            response.status(200).json({
-                status:"ok",
-                shorturlid: uniqueID
-            });
-        }
-    })
-});
+    //first check if the current long link is not already in the db
+    let longurl_link = request.body.longurl;
+    let find_existingurl = `SELECT shorturlid FROM links WHERE longurl = ?`;
 
+    con.query(find_existingurl, [longurl_link], function(error, result) { 
+        if (error) {
+            return response.status(500).json({
+                status: "notok",
+                message: "Something went wrong"
+            });
+        }
+        
+        // if we got a result, it already exists
+        if (result.length > 0) {
+            return response.status(200).json({
+                status: "ok",
+                shorturlid: result[0].shorturlid //return the latest shorturlid
+            });
+        }
+        //otherwise we can create a new id
+        else{
+            let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi, '').substring(2,10); //creaate the uniqueID for a shortened link
+            let sql = `INSERT INTO links(longurl, shorturlid) VALUES('${longurl_link}', '${uniqueID}')`; //add the new shortened link to our db
+            con.query(sql, function(error, result){ //run the query
+                if(error){//if there was an error
+                    response.status(500).json({
+                    status:"notok",
+                    message:"could not add to database"
+                });
+                }
+                else{
+                    response.status(200).json({
+                    status:"ok",
+                    shorturlid: uniqueID
+                    });
+                }
+            })
+        }
+    })  
+});
 
 app.get("/api/get-all-short-urls", function(request, response){ //GET method to get all short urls
     let sql = `SELECT * FROM links`; //get all the rows from links table

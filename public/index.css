@@ -57,7 +57,6 @@ input{
 }
 table{
     margin-top: 4vh;
-    width: 40%;
     height: 10vh;
     margin:auto;
     font-size: calc(0.5vw + 0.4vw);
@@ -68,6 +67,7 @@ table th{
 table, th, td {
     border: 1px solid;
   }
+
 #clear-history{
     border-radius: 8px;
     font-size: calc(0.8vw + 0.4vw);
