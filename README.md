@@ -27,5 +27,9 @@ In order to create the Front-End of URL-Shortener, I used HTML code, with featur
     - **GET**: shorturlid
     - **Redirection**: return longurl according to its respective shorturlid from MYSQL table.
 
+**Optimization**:
+- **Database Storage**:
+    - 
+
 **Lessons Learned**:
 to be written...

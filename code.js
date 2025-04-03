@@ -27,6 +27,7 @@ app.get("/", function(request, response){ //GET method request to page
 });
 
 app.post("/api/create-short-url", function(request, response){ //POST method to create a short url
+    
     let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi, '').substring(2,10); //creaate the uniqueID for a shortened link
     let sql = `INSERT INTO links(longurl, shorturlid) VALUES('${request.body.longurl}', '${uniqueID}')`; //add the new shortened link to our db
     con.query(sql, function(error, result){ //run the query
@@ -44,6 +45,7 @@ app.post("/api/create-short-url", function(request, response){ //POST method to 
         }
     })
 });
+
 
 app.get("/api/get-all-short-urls", function(request, response){ //GET method to get all short urls
     let sql = `SELECT * FROM links`; //get all the rows from links table
