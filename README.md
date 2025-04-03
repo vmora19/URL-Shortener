@@ -29,7 +29,7 @@ In order to create the Front-End of URL-Shortener, I used HTML code, with featur
 
 **Optimization**:
 - **Database Storage**:
-    - 
+    - The API call for POST first checks if our database already has the same link that the user input in its records. If it already exists in our database, we do not create any new ID's and rows in our database but simply return the current shorturl ID, which in turn is added to the host, so that we do not create any new shortened links. 
 
 **Lessons Learned**:
 to be written...
