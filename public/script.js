@@ -1,9 +1,18 @@
 const host = "http://localhost:3000/"; //host
 
         document.querySelector("#clear-history").addEventListener("click", function(){//function for clearing history
-            let html = "";
-            document.querySelector("tbody").innerHTML = html;
-        })
+            fetch(host + "api/clear-history", {
+                method: "DELETE",
+            })
+            .then(response => response.json())
+            .then(data => {
+                    document.querySelector("tbody").innerHTML = ""; // Clear frontend table
+           
+            })
+            .catch(error => {
+                alert("Something went wrong");
+            });
+        });
 
         document.querySelector("#create-short-url").addEventListener("click", function(){
         let longurl = document.querySelector("#input-long-url").value.trim();

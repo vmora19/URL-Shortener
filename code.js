@@ -80,5 +80,21 @@ app.get("/:shorturlid", function(request, response){//GET method for links with 
     })
 })
 
+app.delete("/api/clear-history", function (request, response) { //DELETE method for deleting links from table
+    let sql = "DELETE FROM links";
+    con.query(sql, function (error, result) {
+        if (error) {
+            response.status(500).json({
+                status: "notok",
+                message: "Could not clear history",
+            });
+        } else {
+            response.status(200).json({
+                status: "ok",
+            });
+        }
+    });
+});
+
 app.listen(3000);//listener for our local host
 
