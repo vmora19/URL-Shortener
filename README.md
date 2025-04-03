@@ -12,7 +12,7 @@ URL-Shortener takes in user input links and returns a shorter link that will red
 - **MYSQL**: `npm install --save mysql2`
 
 **Front-End**:
-In order to create the Front-End of URL-Shortener, I used HTML code, with features such as labels, inputs, buttons, and tables. All of which create a cohesive and well-displayed application. Furthermore, I used CSS to style the Home page by using `<div></div>` to split up content and give it responsive styling for changing screen sizes.
+In order to create the Front-End of URL-Shortener, I used HTML code, with features such as labels, inputs, buttons, and tables. All of which create a cohesive and well-displayed application. Furthermore, I used external CSS to style the Home page by using `<div></div>` to split up content and give it responsive styling for changing screen sizes.
 
 **Database Steps**:
 - **Logging in to MYSQL**: `mysql -h localhost -u root`

@@ -6,7 +6,7 @@ const host = "http://localhost:3000/"; //host
             })
             .then(response => response.json())
             .then(data => {
-                    document.querySelector("tbody").innerHTML = ""; // Clear frontend table
+                    document.querySelector("tbody").innerHTML = "";
            
             })
             .catch(error => {
@@ -17,11 +17,13 @@ const host = "http://localhost:3000/"; //host
         document.querySelector("#create-short-url").addEventListener("click", function(){
         let longurl = document.querySelector("#input-long-url").value.trim();
         if(longurl.length == 0){ //if the user did not input anything
-            alert("Enter valid URL"); //display error
+            document.getElementById("output").innerHTML = "No link detected."; //display error
+            document.getElementById("output").style.color = "red";
             return;
         }
         else if(!(longurl.startsWith("http://") || longurl.startsWith("https://"))){ //if the user input link but it is not valid
-            alert("Enter valid link"); //display error
+            document.getElementById("output").innerHTML = "Enter a valid link."; //display error
+            document.getElementById("output").style.color = "red";
             return;
         }
         fetch(host + "api/create-short-url", {
