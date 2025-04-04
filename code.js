@@ -49,10 +49,10 @@ app.post("/api/create-short-url", function(request, response){ //POST method to 
         }
         //otherwise we can create a new id
         else{
-            let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi, '').substring(2,10); //creaate the uniqueID for a shortened link
+            let uniqueID = Math.random().toString(36).replace(/[^a-z0-9]/gi, '').substring(2,10); //create the uniqueID for a shortened link
             let sql = `INSERT INTO links(longurl, shorturlid) VALUES('${longurl_link}', '${uniqueID}')`; //add the new shortened link to our db
             con.query(sql, function(error, result){ //run the query
-                if(error){//if there was an error
+                if(error){ //if there was an error
                     response.status(500).json({
                     status:"notok",
                     message:"could not add to database"
@@ -84,11 +84,11 @@ app.get("/api/get-all-short-urls", function(request, response){ //GET method to 
     })
 });
 
-app.get("/:shorturlid", function(request, response){//GET method for links with shorturlID
+app.get("/:shorturlid", function(request, response){ //GET method for links with shorturlID
     let shorturlid = request.params.shorturlid; //extract shorturlID
     let sql = `SELECT * FROM links WHERE shorturlid = '${shorturlid}' LIMIT 1`; //select rows that match our shorturlID
-    con.query(sql, function(error, result){//run the query
-        if(error){//if there was an error
+    con.query(sql, function(error, result){ //run the query
+        if(error){ //if there was an error
             response.status(500).json({
                 status:"notok",
                 message:"something went wrong with retrieving the shorturlID"
@@ -120,5 +120,5 @@ app.delete("/api/clear-history", function (request, response) { //DELETE method 
     });
 });
 
-app.listen(3000);//listener for our local host
+app.listen(3000); //listener for our local host
 
