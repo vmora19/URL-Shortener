@@ -16,9 +16,9 @@ In order to create the Front-End of URL-Shortener, I used HTML code, with featur
 
 **Database Steps**:
 - **Logging in to MYSQL**: `mysql -h localhost -u root`
-- **Creating Database**: `create database <DATABASE-NAME>`
-- **Connecting to Databse**: `connect <DATABASE-NAME>`
-- **Creating table**: `create table <TABLE-NAME>...`
+- **Creating Database**: `create database shorturls`
+- **Connecting to Databse**: `connect shorturls`
+- **Creating table**: `create table links(longurl varchar(255), shorturlid varchar(255), id int(11) primary key)`
 - **Creating Routes**: `createConnection() in JavaScript file, POST functions, GET functions`
     - **POST**: creating short URL 
     - **GET**: requesting index.html, get-all-short-urls
