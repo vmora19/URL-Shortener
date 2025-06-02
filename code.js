@@ -1,3 +1,10 @@
+const createTableSQL = `
+CREATE TABLE IF NOT EXISTS links (
+  id INT(11) AUTO_INCREMENT PRIMARY KEY,
+  longurl VARCHAR(255),
+  shorturlid VARCHAR(255)
+);
+`;
 const express = require("express"); //express module from Node.js
 
 const mysql = require("mysql2"); //mysql2 library
@@ -8,8 +15,9 @@ app.use(express.static("public")); //make express instance connect to public fol
 app.use(express.json()); //handles JSON requests
 
 const con = mysql.createConnection({//create connection from mysql2 library to database
-    host:"localhost",
+    host:"mysql_container", //host name from docker compose
     user:"root",
+    password:"my-secret-pw", //password for the database
     database:"shorturls"
 });
 
@@ -19,12 +27,29 @@ con.connect(function(error){
     }
     else{
         console.log("Database connected succesfully");
+        con.query(createTableSQL, function(err, result) { //creating links table for container restart
+            if (err) {
+                console.error("Error creating table:", err);
+            } else {
+                console.log("Table 'links' ensured to exist or created.");
+            }
+        });
     }
 })
 
 app.get("/", function(request, response){ //GET method request to page
     response.sendFile(__dirname + "/public/index.html"); //displays home page
 });
+
+app.get("/status", (req, res) => { //GET method to see if we successfully connected to database
+  con.ping(error => {
+    if (error) {
+      return res.send("Database connection failed: " + error.message);
+    }
+    res.send("Database connected successfully");
+  });
+});
+
 
 app.post("/api/create-short-url", function(request, response){ //POST method to create a short url
     
@@ -88,6 +113,7 @@ app.get("/:shorturlid", function(request, response){ //GET method for links with
     let shorturlid = request.params.shorturlid; //extract shorturlID
     let sql = `SELECT * FROM links WHERE shorturlid = '${shorturlid}' LIMIT 1`; //select rows that match our shorturlID
     con.query(sql, function(error, result){ //run the query
+        console.error("SQL error:", error); // <--- Add this
         if(error){ //if there was an error
             response.status(500).json({
                 status:"notok",

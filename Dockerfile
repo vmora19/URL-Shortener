@@ -1,8 +1,10 @@
 # syntax=docker/dockerfile:1
-
-FROM node:lts-alpine
+FROM node:18
+RUN apt-get update && apt-get install -y bash
 WORKDIR /app
-COPY . .
-RUN yarn install --production
-CMD ["node", "code.js"]
+COPY package*.json ./
+RUN npm install
+COPY wait-for-it.sh ./
+RUN chmod +x wait-for-it.sh
 EXPOSE 3000
+
