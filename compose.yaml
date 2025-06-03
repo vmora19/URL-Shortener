@@ -27,7 +27,6 @@ services:
     volumes:
       - .:/usr/src/app
     working_dir: /usr/src/app
-    # command: ["node", "code.js"]
     command: ["./wait-for-it.sh", "mysql_container:3306", "--", "node", "code.js"]
 
 

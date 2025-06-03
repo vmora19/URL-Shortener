@@ -1,4 +1,5 @@
-const createTableSQL = `
+const createTableSQL = //SQL command to create links table
+`
 CREATE TABLE IF NOT EXISTS links (
   id INT(11) AUTO_INCREMENT PRIMARY KEY,
   longurl VARCHAR(255),
@@ -25,13 +26,13 @@ con.connect(function(error){
     if(error){ //if there was error in the connection
         console.log("Database connection failed", error);
     }
-    else{
+    else{ //otherwise database connected succesfully
         console.log("Database connected succesfully");
         con.query(createTableSQL, function(err, result) { //creating links table for container restart
-            if (err) {
+            if (err) { //if there is an error
                 console.error("Error creating table:", err);
-            } else {
-                console.log("Table 'links' ensured to exist or created.");
+            } else { //otherwise the table was created
+                console.log("Table 'links' created.");
             }
         });
     }
